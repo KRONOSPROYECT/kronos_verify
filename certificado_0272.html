@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificado KRONOS</title>
+    <style>
+        body { font-family: Arial, sans-serif; display:flex; justify-content:center; }
+        .page { width: 210mm; height: 297mm; border: 2px solid #000; padding: 40px; box-sizing: border-box; }
+        h1 { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; }
+        .grid { display: flex; justify-content: space-between; margin-top: 20px; }
+        .qr { width: 150px; height: 150px; border: 1px dashed #000; display: flex; align-items: center; justify-content: center; }
+        .hash { background: #000; color: #fff; padding: 10px; font-family: monospace; font-size: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>KRONOS - CERTIFICADO DE AUTENTICIDAD</h1>
+        <div class="grid">
+            <div>
+                <p><b>FOLIO:</b> KRN-JELIEL-02-72</p>
+                <p><b>FECHA:</b> 2026-08-20</p>
+                <p><b>UID:</b> 11/2</p>
+            </div>
+            <div class="qr">
+                <img src="qr_02_72.png" style="width:100%;height:100%;">
+            </div>
+        </div>
+        <div class="hash">
+            SHA-256: a7f3c9d2e8b1f4a6c0d3e5b8a9c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0
+        </div>
+        <div style="margin-top:30px; border-top:1px solid #000; text-align:center; padding-top:10px;">
+            SELLO DIGITAL. VALIDACIÓN OFFLINE VÍA QR Y HASH LOCAL.
+        </div>
+    </div>
+</body>
+</html>

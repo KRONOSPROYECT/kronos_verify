@@ -1,0 +1,8 @@
+{
+  "name": "Verificador Kronos",
+  "short_name": "Kronos",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00ff00"
+}
