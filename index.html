@@ -30,9 +30,9 @@
         <div class="footer">VERIFICACIÓN OFFLINE • ANCLAJE HÍBRIDO</div>
     </div>
 
-    <script>
+        <script>
         const FOLIO_BASE = "KRN-JELIEL-02-72";
-        // <--- ESTO LO CAMBIARÁS EN EL PASO 2
+        // Este es el hash que ya tienes para el Día 9:
         const HASH_CUANTICO_MAESTRO = "e70a502d561d50ee602cfdfe385edd535dda84e1be40706b927a1f802d4b9e0b"; 
 
         function getLunarDay() {
@@ -57,29 +57,20 @@
             document.getElementById('lunar_display').innerText = `FASE LUNAR: DÍA ${diaLunar} / 29.5`;
             document.getElementById('folio_display').innerText = "Folio: " + folio;
 
-            const ventanaAbierta = (diaLunar >= 13 && diaLunar <= 21);
-            const windowDiv = document.getElementById('window_display');
-            const statusDiv = document.getElementById('status_display');
-
-            if (!ventanaAbierta) {
-                windowDiv.innerText = "VENTANA ASTRONÓMICA: CERRADA";
-                statusDiv.innerText = "ROJO 1 - BLOQUEADO";
-                statusDiv.className = "status invalid";
-                document.getElementById('hash_result').innerText = "ERROR: FUERA DE VENTANA CÓSMICA";
-                return;
-            }
-
-            windowDiv.innerText = "VENTANA ASTRONÓMICA: ABIERTA 🔓";
+            // SIN BLOQUEO DE VENTANA. Solo verifica el hash del día.
             const semillaHibrida = folio + '-' + diaLunar;
             const hashCalculado = await sha256(semillaHibrida);
             document.getElementById('hash_result').innerText = `HASH (Luna ${diaLunar}): ${hashCalculado}`;
 
+            const statusDiv = document.getElementById('status_display');
             if (hashCalculado === HASH_CUANTICO_MAESTRO) {
                 statusDiv.innerText = "VERDE 0 - SELLADO";
                 statusDiv.className = "status valid";
+                document.getElementById('window_display').innerText = "VENTANA ASTRONÓMICA: ABIERTA 🔓";
             } else {
                 statusDiv.innerText = "ROJO 1 - FALSO";
                 statusDiv.className = "status invalid";
+                document.getElementById('window_display').innerText = "VENTANA ASTRONÓMICA: CERRADA";
             }
         }
         verificar();
