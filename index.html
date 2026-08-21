@@ -16,7 +16,6 @@
         #hash_result { font-size: 10px; margin-top: 15px; opacity: 0.7; color: #aaa; }
         .lunar-day { font-size: 12px; color: #FFD700; margin-bottom: 10px; }
         .window { font-size: 11px; color: #FFD700; margin-top: 5px; }
-        .countdown { font-size: 24px; margin: 10px 0; color: #fff; }
         .footer { margin-top:20px;font-size:10px;opacity:0.5; }
     </style>
 </head>
@@ -27,15 +26,14 @@
         <div id="status_display" class="status">ESCANEANDO...</div>
         <div id="folio_display" class="folio">Folio: Cargando...</div>
         <div id="hash_result"></div>
-        <div id="countdown_display" class="countdown"></div>
         <div class="window" id="window_display">VENTANA ASTRONÓMICA: CERRADA</div>
         <div class="footer">VERIFICACIÓN OFFLINE • ANCLAJE HÍBRIDO</div>
     </div>
 
     <script>
         const FOLIO_BASE = "KRN-JELIEL-02-72";
-        // EL HASH MAESTRO QUE CALCULAMOS EN LA VENTANA ACTUAL (PUENTE MEM-SHIN 13-21)
-        const HASH_CUANTICO_MAESTRO = "c8a7d3b2e1f4a6c0d3e5b8a9c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0"; // <-- CAMBIAR POR EL QUE GENERA EL SCRIPT
+        // <--- ESTO LO CAMBIARÁS EN EL PASO 2
+        const HASH_CUANTICO_MAESTRO = "PEGA_AQUI_TU_HASH_DE_64_CARACTERES"; 
 
         function getLunarDay() {
             const knownNewMoon = new Date(2000, 0, 6).getTime();
@@ -59,26 +57,18 @@
             document.getElementById('lunar_display').innerText = `FASE LUNAR: DÍA ${diaLunar} / 29.5`;
             document.getElementById('folio_display').innerText = "Folio: " + folio;
 
-            // Ventana de Validación activa: Días 13, 14, 15, 16, 17, 18, 19, 20 y 21 (Puente Mem-Shin)
             const ventanaAbierta = (diaLunar >= 13 && diaLunar <= 21);
-            
             const windowDiv = document.getElementById('window_display');
             const statusDiv = document.getElementById('status_display');
-            const countdownDiv = document.getElementById('countdown_display');
 
             if (!ventanaAbierta) {
                 windowDiv.innerText = "VENTANA ASTRONÓMICA: CERRADA";
                 statusDiv.innerText = "ROJO 1 - BLOQUEADO";
                 statusDiv.className = "status invalid";
                 document.getElementById('hash_result').innerText = "ERROR: FUERA DE VENTANA CÓSMICA";
-                
-                // Cuenta atrás para la siguiente apertura (simulada en días)
-                let diasRestantes = (diaLunar < 13) ? 13 - diaLunar : (29 - diaLunar) + 13;
-                countdownDiv.innerText = `PRÓXIMA VENTANA EN: ${diasRestantes} DÍAS`;
                 return;
             }
 
-            // Si está en ventana, calcular el hash
             windowDiv.innerText = "VENTANA ASTRONÓMICA: ABIERTA 🔓";
             const semillaHibrida = folio + '-' + diaLunar;
             const hashCalculado = await sha256(semillaHibrida);
@@ -87,11 +77,9 @@
             if (hashCalculado === HASH_CUANTICO_MAESTRO) {
                 statusDiv.innerText = "VERDE 0 - SELLADO";
                 statusDiv.className = "status valid";
-                countdownDiv.innerText = "PUENTE MEM-SHIN ACTIVO";
             } else {
                 statusDiv.innerText = "ROJO 1 - FALSO";
                 statusDiv.className = "status invalid";
-                countdownDiv.innerText = "ACCESO DENEGADO";
             }
         }
         verificar();
